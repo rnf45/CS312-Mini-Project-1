@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Blog</title>
+    <link rel="stylesheet" href="/styles.css">
+
+</head>
+<body>
+    <h1>Welcome to Dog Blog!</h1>
+
+    <h2>Create a Post</h2>
+    <form action="/create" method="POST">
+        <label for="pet">Pet Name:</label><br>
+        <input type="text" id="pet" name="pet" required><br><br>
+
+        <label for="title">Breed:</label><br>
+        <input type="text" id="breed" name="breed" required><br><br>
+
+        <label for="content">Describe your Pet:</label><br>
+        <textarea id="content" name="content" rows="5" required></textarea>
+
+        <button type="submit">Create</button>
+    </form>
+
+    <h2>Feed</h2>
+    <ul>
+        <% posts.forEach(post => { %>
+            <li>
+                
+                <h3><%= post.pet %></h3>
+                <h4><%= post.breed %></h4>
+                <p><%= post.content %></p>
+                <small>Created on <%= post.timeCreated %></small>
+
+                <a href="/edit/<%= posts.indexOf(post) %>">Edit</a>
+                <form action="/delete-post/<%= posts.indexOf(post) %>" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>    
+        <% }) %>
+    </ul>
+</body>
+</html>
